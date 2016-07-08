@@ -1,0 +1,18 @@
+{
+  "name": "lambda-<%= moduleName %>",
+  "version": "0.1.0",
+  "description": "<%= description %>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/<%= githubOrg %>/lambda-<%= moduleName %>.git"
+  },
+  "scripts": {
+    "preversion": "grunt test",
+    "postversion": "git commit -m \"Bump package version to $npm_package_version\" package.json; git flow release start $npm_package_version; git flow release finish -m $npm_package_version $npm_package_version; git checkout develop; git merge master",
+    "test": "grunt test",
+    "start": "grunt invoke"
+  },
+  "author": "Craig Hughes <craig.npm@rungie.com> (https://npmjs.org/~hughescr)",
+  "license": "BSD-3-Clause",
+  "readmeFilename": "README.md"
+}

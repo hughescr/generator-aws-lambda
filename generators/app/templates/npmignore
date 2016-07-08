@@ -1,0 +1,124 @@
+# Compiled binaries #
+#####################
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.ko
+*.elf
+
+# Compiled Dynamic libraries
+*.so.*
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+
+# Packages and archives #
+#########################
+# It's better to unpack these files and commit the raw source because
+# git has its own built in compression methods.
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.bz2
+*.xz
+*.lzma
+*.cab
+*.tgz
+*.tbz
+
+#packing-only formats
+*.iso
+*.tar
+
+#package management formats
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+*.msi
+*.msm
+*.msp
+
+# OSX turds #
+#############
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# XCode turds #
+###############
+xcuserdata
+
+# Sublime Text turds #
+######################
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+#sftp configuration file
+sftp-config.json
+
+node_modules
+docs/*.png
+
+# Enviroment files which may contain keys and secrets
+.env
+
+# Test artifacts
+xunit.xml
+coverage
+
+# Specific stuff that we don't want in NPM but do want in Git
+.babelrc
+.eslintignore
+.eslintrc.js
+.flowconfig
+.gitignore
+.npmignore
+.yo-rc.json
+Gruntfile.js
+*.sublime-project
+src
+test

@@ -1,0 +1,8 @@
+{
+    "AWS":
+    {
+        "ACCESS_KEY_ID": "<%= awsAccessKey %>",
+        "SECRET_ACCESS_KEY": "<%= awsSecretKey %>",
+        "REGION": "<%= awsRegion %>"
+    }
+}
