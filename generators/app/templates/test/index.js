@@ -1,5 +1,5 @@
 'use strict';
-<% if(useFlow) {  %>/* @flow */<%  } %>
+/* @flow */
 
 const main = require('../src/index.js');
 const data = require('./data/lambda-event.json');

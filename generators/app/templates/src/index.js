@@ -1,5 +1,5 @@
 'use strict';
-<% if(useFlow) {  %>/* @flow */<%  } %>
+/* @flow */
 
 const nconf = require('nconf');
 nconf.argv()

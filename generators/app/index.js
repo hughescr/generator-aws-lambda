@@ -116,10 +116,9 @@ module.exports = generators.Base.extend(
             this.config.getAll()
         );
 
-        this.fs.copyTpl(
+        this.fs.copy(
             this.templatePath('src/index.js'),
-            this.destinationPath('src/index.js'),
-            this.config.getAll()
+            this.destinationPath('src/index.js')
         );
 
         this.fs.copy(
@@ -132,10 +131,9 @@ module.exports = generators.Base.extend(
             this.destinationPath('test/data/lambda-event.json')
         );
 
-        this.fs.copyTpl(
+        this.fs.copy(
             this.templatePath('test/index.js'),
-            this.destinationPath('test/index.js'),
-            this.config.getAll()
+            this.destinationPath('test/index.js')
         );
 
         this.fs.copyTpl(
