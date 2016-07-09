@@ -120,5 +120,4 @@ coverage
 .yo-rc.json
 Gruntfile.js
 *.sublime-project
-src
 test
