@@ -42,19 +42,21 @@ module.exports = generators.Base.extend(
                 name: 'awsRegion',
                 message: 'Which AWS region should this lambda deploy to?',
                 store: true,
-                'default': 'us-west-2',
+                'default': this.config.get('awsRegion') || 'us-west-2',
             },
             {
                 type: 'input',
                 name: 'awsAccessKey',
                 message: 'What is your AWS access key for deployment?',
                 store: false,
+                default: this.config.get('awsAccessKey'),
             },
             {
                 type: 'password',
                 name: 'awsSecretKey',
                 message: 'What is your AWS secret key for deployment?',
                 store: false,
+                default: this.config.get('awsSecretKey'),
             },
             {
                 type: 'list',
