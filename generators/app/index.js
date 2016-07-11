@@ -49,14 +49,14 @@ module.exports = generators.Base.extend(
                 name: 'awsAccessKey',
                 message: 'What is your AWS access key for deployment?',
                 store: false,
-                default: this.config.get('awsAccessKey'),
+                'default': this.config.get('awsAccessKey'),
             },
             {
                 type: 'password',
                 name: 'awsSecretKey',
                 message: 'What is your AWS secret key for deployment?',
                 store: false,
-                default: this.config.get('awsSecretKey'),
+                'default': this.config.get('awsSecretKey'),
             },
             {
                 type: 'list',
@@ -91,7 +91,7 @@ module.exports = generators.Base.extend(
                         name: 'lambdaRoleARN',
                         message: 'Enter the ARN for the role to run this lambda under',
                         store: true,
-                        default: 'arn:aws:iam::281650663203:role/lambda_basic_execution',
+                        'default': 'arn:aws:iam::281650663203:role/lambda_basic_execution',
                     },
                     // Should also add Timeout, MemorySize -- just use defaults for now
                 ])
