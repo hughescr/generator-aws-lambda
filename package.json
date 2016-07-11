@@ -1,5 +1,8 @@
 {
   "name": "@hughescr/generator-aws-lambda",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.1.0",
   "description": "Yeoman generator to create a NodeJS AWS lamdba which can be written in modern Javascript (ES6) and will get transpiled appropriately for AWS",
   "readmeFilename": "README.md",
