@@ -16,6 +16,8 @@
     "yeoman-generator"
   ],
   "dependencies": {
+    "aws-sdk": "^2.4.6",
+    "es6-promisify": "^4.1.0",
     "yeoman-generator": "^0.23.4"
   },
   "devDependencies": {
