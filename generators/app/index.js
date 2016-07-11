@@ -1,6 +1,12 @@
 'use strict';
 
+const promisify = require('es6-promisify');
+
+const fs = require('fs');
+const readFile = promisify(fs.readFile);
+
 const generators = require('yeoman-generator');
+const AWS = require('aws-sdk');
 
 module.exports = generators.Base.extend(
 {
@@ -36,35 +42,103 @@ module.exports = generators.Base.extend(
                 name: 'awsRegion',
                 message: 'Which AWS region should this lambda deploy to?',
                 store: true,
-                'default': 'us-west-2',
+                'default': this.config.get('awsRegion') || 'us-west-2',
             },
             {
                 type: 'input',
                 name: 'awsAccessKey',
                 message: 'What is your AWS access key for deployment?',
-                store: true,
+                store: false,
+                default: this.config.get('awsAccessKey'),
             },
             {
-                type: 'input',
+                type: 'password',
                 name: 'awsSecretKey',
                 message: 'What is your AWS secret key for deployment?',
-                store: true,
+                store: false,
+                default: this.config.get('awsSecretKey'),
+            },
+            {
+                type: 'list',
+                name: 'awsCreateNewLambda',
+                message: 'Should we create this AWS Lambda (ie it does not already exist?)',
+                choices:
+                [
+                    {
+                        name: 'Existing lambda',
+                        value: false,
+                        'short': 'Existing',
+                    },
+                    {
+                        name: 'Create/New lambda',
+                        value: true,
+                        'short': 'New',
+                    },
+                ],
+                store: false,
+                'default': 0,
             },
         ])
         .then(answers =>
         {
             this.config.set(answers);
-            return this.prompt(
-            [
+            if(answers.awsCreateNewLambda)
+            {
+                return this.prompt(
+                [
+                    {
+                        type: 'input',
+                        name: 'lambaRoleARN',
+                        message: 'Enter the ARN for the role to run this lambda under',
+                        store: true,
+                        default: 'arn:aws:iam::281650663203:role/lambda_basic_execution',
+                    },
+                    // Should also add Timeout, MemorySize -- just use defaults for now
+                ])
+                .then(newAnswers =>
                 {
-                    type: 'input',
-                    name: 'awsLambdaARN',
-                    message: 'What is the AWS ARN of the lambda function you want to bind to?',
-                    store: true,
-                    'default': `arn:aws:lambda:us-west-2:281650663203:function:${this.config.get('moduleName')}`,
-                },
-            ])
-            .then(this.config.set.bind(this.config));
+                    const lambda = new AWS.Lambda({
+                        accessKeyId: answers.awsAccessKey,
+                        secretAccessKey: answers.awsSecretKey,
+                        region: answers.awsRegion,
+                    });
+                    const createLambda = promisify(lambda.createFunction, lambda);
+
+                    return readFile(this.templatePath('initial_zip_file/initial.zip'))
+                    .then(zipFile =>
+                    {
+                        return createLambda({
+                            Code:
+                            {
+                                ZipFile: zipFile,
+                            },
+                            FunctionName: answers.moduleName,
+                            Description: answers.description,
+                            Runtime: 'nodejs4.3',
+                            Role: newAnswers.lambaRoleARN,
+                            Handler: 'build/index.handler',
+                        });
+                    })
+                    .then(createLambdaResponse =>
+                    {
+                        return this.config.set({ awsLambdaARN: createLambdaResponse.FunctionArn });
+                    });
+                });
+            }
+            else
+            {
+                return this.prompt(
+                [
+                    {
+                        type: 'input',
+                        name: 'awsLambdaARN',
+                        message: 'What is the AWS ARN of the lambda function you want to bind to?',
+                        store: true,
+                        'default': this.config.get('awsLambdaARN') || `arn:aws:lambda:us-west-2:281650663203:function:${this.config.get('moduleName')}`,
+                    },
+                ])
+                .then(this.config.set.bind(this.config));
+            }
         });
     },
 
