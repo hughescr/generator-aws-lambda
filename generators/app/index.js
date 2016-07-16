@@ -251,6 +251,7 @@ module.exports = generators.Base.extend(
                 options:\
                 {\
                     reportFormats: ['html'],\
+                    root: 'src',\
                     coverageFolder: 'coverage',\
                     recursive: true,\
                     quiet: false,\
@@ -261,6 +262,7 @@ module.exports = generators.Base.extend(
                     scriptPath: require.resolve('isparta/bin/isparta'),\
                     nodeExec: require.resolve('.bin/babel-node'),\
                     mochaOptions: ['--compilers', 'js:babel-register'],\
+                    istanbulOptions: ['--include-all-sources'],\
                 },\
             },\
         }");
