@@ -224,7 +224,7 @@ module.exports = generators.Base.extend(
 
         if(!/require\('load-grunt-tasks'\)\(grunt\);/.test(this.gruntfile.toString()))
         {
-        this.gruntfile.prependJavaScript("require('load-grunt-tasks')(grunt);");
+            this.gruntfile.prependJavaScript("require('load-grunt-tasks')(grunt);");
         }
 
         this.gruntfile.insertConfig('clean', JSON.stringify(
@@ -343,6 +343,7 @@ module.exports = generators.Base.extend(
         this.npmInstall(
             [
                 '@hughescr/eslint-config-flow',
+                'aws-sdk',
                 'babel-cli',
                 'babel-eslint',
                 'babel-plugin-transform-flow-strip-types',
