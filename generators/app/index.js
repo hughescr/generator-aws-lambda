@@ -222,7 +222,10 @@ module.exports = generators.Base.extend(
             this.config.getAll()
         );
 
+        if(!/require\('load-grunt-tasks'\)\(grunt\);/.test(this.gruntfile.toString()))
+        {
         this.gruntfile.prependJavaScript("require('load-grunt-tasks')(grunt);");
+        }
 
         this.gruntfile.insertConfig('clean', JSON.stringify(
         {
