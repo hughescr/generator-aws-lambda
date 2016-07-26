@@ -125,20 +125,18 @@ module.exports = generators.Base.extend(
                     });
                 });
             }
-            else
-            {
-                return this.prompt(
-                [
-                    {
-                        type: 'input',
-                        name: 'awsLambdaARN',
-                        message: 'What is the AWS ARN of the lambda function you want to bind to?',
-                        store: true,
-                        'default': this.config.get('awsLambdaARN') || `arn:aws:lambda:us-west-2:281650663203:function:${this.config.get('moduleName')}`,
-                    },
-                ])
-                .then(this.config.set.bind(this.config));
-            }
+
+            return this.prompt(
+            [
+                {
+                    type: 'input',
+                    name: 'awsLambdaARN',
+                    message: 'What is the AWS ARN of the lambda function you want to bind to?',
+                    store: true,
+                    'default': this.config.get('awsLambdaARN') || `arn:aws:lambda:us-west-2:281650663203:function:${this.config.get('moduleName')}`,
+                },
+            ])
+            .then(this.config.set.bind(this.config));
         });
     },
 
