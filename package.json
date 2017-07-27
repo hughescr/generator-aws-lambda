@@ -11,7 +11,7 @@
     "url": "git://github.com/hughescr/generator-aws-lambda.git"
   },
   "scripts": {
-    "postversion": "git commit -m \"Bump package version to $npm_package_version\" package.json; git flow release start $npm_package_version; git flow release finish -m $npm_package_version $npm_package_version; git checkout develop; git merge master"
+    "postversion": "git commit -m \"Bump package version to $npm_package_version\" package.json package-lock.json; git flow release start $npm_package_version; git flow release finish -m $npm_package_version $npm_package_version; git checkout develop; git merge master"
   },
   "author": "Craig Hughes <craig.npm@rungie.com> (https://npmjs.org/~hughescr)",
   "license": "BSD-3-Clause",
